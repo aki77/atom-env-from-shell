@@ -1,6 +1,7 @@
 # env-from-shell package
 
 Make Atom use the $PATH set up by the user's shell.
+[![Build Status](https://travis-ci.org/aki77/atom-env-from-shell.svg)](https://travis-ci.org/aki77/atom-env-from-shell)
 
 Inspired by [exec-path-from-shell.el](https://github.com/purcell/exec-path-from-shell)
 
