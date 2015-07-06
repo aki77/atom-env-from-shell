@@ -73,11 +73,12 @@ module.exports =
 
   echoEnvs: (names) ->
     new Promise((resolve, reject) ->
-      echoArgs = names.map((v) -> "${#{v}}").join("\\\\n")
-      command = "#{process.env.SHELL} -i -c 'echo #{echoArgs}'"
+      echoCommands = names.map((v) -> "echo ${#{v}};").join('')
+      command = "#{process.env.SHELL} -i -c '#{echoCommands}'"
+      console.log 'command', command if atom.config.get('env-from-shell.debug')
 
       exec(command, (error, stdout, stderr) ->
         return reject(error) if error
-        resolve(stdout.trim())
+        resolve(stdout)
       )
     )

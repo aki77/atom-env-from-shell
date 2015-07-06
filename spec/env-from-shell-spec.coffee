@@ -50,5 +50,5 @@ describe "EnvFromShell", ->
     it "Return the result of printing environment variable in the user's shell", ->
       waitsForPromise ->
         EnvFromShell.echoEnvs(['ATOM_HOME', 'NODE_PATH']).then((output) ->
-          expect(output).toEqual([env.ATOM_HOME, env.NODE_PATH].join("\n"))
+          expect(output).toEqual([env.ATOM_HOME, env.NODE_PATH].join("\n") + "\n")
         )
