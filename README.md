@@ -7,20 +7,15 @@ Inspired by [exec-path-from-shell.el](https://github.com/purcell/exec-path-from-
 
 ## Settings
 
-* `variables` (default: ['PATH'])
+* `variables`: List of environment variables which are copied from the shell.(default: `['PATH']`)
+* `autoRun`: [auto-run](https://atom.io/packages/auto-run) package is required.(default: `false`)
 
-[![Gyazo](http://i.gyazo.com/b8b749c268c2eee06c4c4136deda93ef.png)](http://gyazo.com/b8b749c268c2eee06c4c4136deda93ef)
+[![Gyazo](http://i.gyazo.com/d8fcc7c6e830e55735dc9f8fa5aa30a8.png)](http://gyazo.com/d8fcc7c6e830e55735dc9f8fa5aa30a8)
 
 ## Commands
 
 * `env-from-shell:copy`
 * `env-from-shell:reset`
-
-## Automatically loading
-
-If you want to load when window opens, You can use atom [auto-run](https://atom.io/packages/auto-run) packages with this.
-
-[![Gyazo](http://i.gyazo.com/90da7e6f07f21b55571ff41f1604d442.png)](http://gyazo.com/90da7e6f07f21b55571ff41f1604d442)
 
 ## Similar packages
 

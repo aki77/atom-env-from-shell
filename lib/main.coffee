@@ -10,6 +10,11 @@ module.exports =
       default: ['PATH']
       items:
         type: 'string'
+    autoRun:
+      order: 2
+      description: 'auto-run package is required.'
+      type: 'boolean'
+      default: false
     debug:
       order: 99
       type: 'boolean'
@@ -81,4 +86,14 @@ module.exports =
         return reject(error) if error
         resolve(stdout)
       )
+    )
+
+  activateConfig: ->
+    pack = atom.packages.getActivePackage('auto-run')
+    return unless pack
+
+    {registerCommand} = pack.mainModule.provideAutoRun()
+    registerCommand(
+      keyPath: 'env-from-shell.autoRun'
+      command: 'env-from-shell:copy'
     )
