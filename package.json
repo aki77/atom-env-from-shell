@@ -1,0 +1,24 @@
+{
+  "name": "env-from-shell",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Make Atom use the $PATH set up by the user's shell",
+  "keywords": [
+    "shell",
+    "path",
+    "env"
+  ],
+  "activationCommands": {
+    "atom-workspace": [
+      "env-from-shell:copy",
+      "env-from-shell:reset"
+    ]
+  },
+  "repository": "https://github.com/aki77/atom-env-from-shell",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
