@@ -1,7 +1,7 @@
 {
   "name": "env-from-shell",
   "main": "./lib/main",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Make Atom use the $PATH set up by the user's shell",
   "keywords": [
     "shell",
@@ -19,6 +19,5 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
