@@ -1,7 +1,7 @@
 {
   "name": "env-from-shell",
   "main": "./lib/main",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Make Atom use the $PATH set up by the user's shell",
   "keywords": [
     "shell",
