@@ -2,24 +2,6 @@
 {exec} = require 'child_process'
 
 module.exports =
-  config:
-    variables:
-      order: 1
-      description: 'List of environment variables which are copied from the shell.'
-      type: 'array'
-      default: ['PATH']
-      items:
-        type: 'string'
-    autoRun:
-      order: 2
-      description: 'auto-run package is required.'
-      type: 'boolean'
-      default: false
-    debug:
-      order: 99
-      type: 'boolean'
-      default: false
-
   activate: ->
     @commandSubscription = atom.commands.add('atom-workspace',
       'env-from-shell:copy': =>
@@ -77,9 +59,9 @@ module.exports =
     subscriptions
 
   echoEnvs: (names) ->
-    new Promise((resolve, reject) ->
-      echoCommands = names.map((v) -> "echo ${#{v}};").join('')
-      command = "#{process.env.SHELL} -i -c '#{echoCommands}'"
+    new Promise((resolve, reject) =>
+      echoCommands = @buildEchoCommands(names)
+      command = "#{process.env.SHELL} -i -c #{echoCommands}"
       console.log 'command', command if atom.config.get('env-from-shell.debug')
 
       exec(command, (error, stdout, stderr) ->
@@ -87,6 +69,13 @@ module.exports =
         resolve(stdout)
       )
     )
+
+  buildEchoCommands: (names) ->
+    echoCommands = names.map((v) -> "echo ${#{v}};").join('')
+    echoCommands = "'#{echoCommands}'"
+    if process.env.SHELL.match(/fish|tc?sh$/)
+      echoCommands = "\"sh -c #{echoCommands}\""
+    echoCommands
 
   activateConfig: ->
     pack = atom.packages.getActivePackage('auto-run')

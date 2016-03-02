@@ -19,5 +19,27 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "configSchema": {
+    "variables": {
+      "order": 1,
+      "description": "List of environment variables which are copied from the shell.",
+      "type": "array",
+      "default": ["PATH"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "autoRun": {
+      "order": 2,
+      "description": "auto-run package is required.",
+      "type": "boolean",
+      "default": false
+    },
+    "debug": {
+      "order": 99,
+      "type": "boolean",
+      "default": false
+    }
+  }
 }

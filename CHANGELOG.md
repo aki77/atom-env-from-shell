@@ -1,3 +1,7 @@
+## 0.2.0
+* Add Fish shell support
+* Move config schema to package.json
+
 ## 0.1.2
 * Add autoRun settings
 
