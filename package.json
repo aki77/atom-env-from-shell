@@ -1,7 +1,7 @@
 {
   "name": "env-from-shell",
   "main": "./lib/main",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Make Atom use the $PATH set up by the user's shell",
   "keywords": [
     "shell",
@@ -25,7 +25,9 @@
       "order": 1,
       "description": "List of environment variables which are copied from the shell.",
       "type": "array",
-      "default": ["PATH"],
+      "default": [
+        "PATH"
+      ],
       "items": {
         "type": "string"
       }
