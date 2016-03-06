@@ -1,3 +1,6 @@
+## 0.3.0
+* Use consistent-env to detect PATH(refs #2)
+
 ## 0.2.0
 * Add Fish shell support
 * Move config schema to package.json

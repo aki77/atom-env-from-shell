@@ -19,7 +19,9 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "consistent-env": "^1.1.2"
+  },
   "configSchema": {
     "variables": {
       "order": 1,

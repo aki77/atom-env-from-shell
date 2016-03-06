@@ -8,8 +8,12 @@ describe "EnvFromShell", ->
     workspaceElement = atom.views.getView(atom.workspace)
     activationPromise = atom.packages.activatePackage('env-from-shell')
 
-    spyOn(EnvFromShell, 'echoEnvs').andCallFake((names) ->
-      Promise.resolve(names.map((name) -> "#{name} shell value").join("\n"))
+    spyOn(EnvFromShell, 'getEnvs').andCallFake((names) ->
+      environment = {}
+      names.forEach((name) ->
+        environment[name] = "#{name} shell value"
+      )
+      Promise.resolve(environment)
     )
 
     env.FOO = 'default value'
@@ -43,12 +47,13 @@ describe "EnvFromShell", ->
         expect(env.FOO).toEqual('default value')
         expect(env.FOO_PATH).toBeUndefined()
 
-  describe "echoEnvs", ->
+  describe "getEnvs", ->
     beforeEach ->
-      jasmine.unspy(EnvFromShell, 'echoEnvs')
+      jasmine.unspy(EnvFromShell, 'getEnvs')
 
-    it "Return the result of printing environment variable in the user's shell", ->
+    it "Return the result of environment variable in the user's shell", ->
       waitsForPromise ->
-        EnvFromShell.echoEnvs(['ATOM_HOME', 'NODE_PATH']).then((output) ->
-          expect(output).toEqual([env.ATOM_HOME, env.NODE_PATH].join("\n") + "\n")
+        EnvFromShell.getEnvs(['ATOM_HOME', 'NODE_PATH']).then((environment) ->
+          expect(environment.ATOM_HOME).toEqual(env.ATOM_HOME)
+          expect(environment.NODE_PATH).toEqual(env.NODE_PATH)
         )

@@ -1,5 +1,5 @@
 {CompositeDisposable, Disposable}  = require 'atom'
-{exec} = require 'child_process'
+{async: cenv} = require 'consistent-env'
 
 module.exports =
   activate: ->
@@ -18,11 +18,12 @@ module.exports =
     @envsSubscriptions = null
 
   getEnvs: (names) ->
-    @echoEnvs(names).then((stdout) ->
-      lines = stdout.split("\n")
+    cenv().then((environment) ->
       envs = {}
-      for name, idx in names
-        envs[name] = lines[idx]
+      names.forEach((name) ->
+        return unless environment[name]?
+        envs[name] = environment[name]
+      )
       envs
     )
 
@@ -57,25 +58,6 @@ module.exports =
     if atom.config.get('env-from-shell.debug')
       console.log 'setEnvs', envs
     subscriptions
-
-  echoEnvs: (names) ->
-    new Promise((resolve, reject) =>
-      echoCommands = @buildEchoCommands(names)
-      command = "#{process.env.SHELL} -i -c #{echoCommands}"
-      console.log 'command', command if atom.config.get('env-from-shell.debug')
-
-      exec(command, (error, stdout, stderr) ->
-        return reject(error) if error
-        resolve(stdout)
-      )
-    )
-
-  buildEchoCommands: (names) ->
-    echoCommands = names.map((v) -> "echo ${#{v}};").join('')
-    echoCommands = "'#{echoCommands}'"
-    if process.env.SHELL.match(/fish|tc?sh$/)
-      echoCommands = "\"sh -c #{echoCommands}\""
-    echoCommands
 
   activateConfig: ->
     pack = atom.packages.getActivePackage('auto-run')
